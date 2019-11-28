@@ -1,3 +1,4 @@
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
 // path.join(__dirname, 'main.js')
@@ -15,7 +16,9 @@ module.exports = {
       loader: 'vue-loader',
     }],
   },
-  plugins: [],
+  plugins: [
+    new VueLoaderPlugin(),
+  ],
   output: {
     filename: '[name].js',
     path: path.join(__dirname, '/dist'),
