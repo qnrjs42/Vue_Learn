@@ -9,36 +9,8 @@
 </head>
 
 <body>
-  <div id="root">
-    <!-- HTML에서는 kebab-case ex) word-relay -->
-
-  </div>
+  <div id="root"></div>
+  <script src="/dist/app.js"></script>
 </body>
-<script>
-// javaScript에서는 camel-case ex) wordRelay
-  Vue.component('', { // 전역 컴포넌트
-    template: `
-
-    `,
-    data() {
-      return {
-        word: '',
-        result: '',
-        value: '',
-      }
-    },
-    methods: {
-      onSubmitForm(e) {
-        e.preventDefault();
-      }
-    },
-  });
-</script>
-<script>
-  const app = new Vue({
-    el: '#root',
-
-  });
-</script>
 
 </html>
