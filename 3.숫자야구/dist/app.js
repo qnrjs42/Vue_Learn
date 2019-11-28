@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("throw new Error(\"Module parse failed: Unexpected token (1:0)\\nYou may need an appropriate loader to handle this file type, currently no loaders are configured to process this file. See https://webpack.js.org/concepts#loaders\\n> <template>\\n|   <div>\\n|     <h1>{{result}}</h1>\");\n\n//# sourceURL=webpack:///./NumberBaseball.vue?");
+eval("throw new Error(\"Module build failed (from ./node_modules/vue-loader/lib/index.js):\\nTypeError: Cannot read property 'parseComponent' of undefined\\n    at parse (C:\\\\Users\\\\tracker\\\\Desktop\\\\vue_learn\\\\3.숫자야구\\\\node_modules\\\\@vue\\\\component-compiler-utils\\\\dist\\\\parse.js:14:23)\\n    at Object.module.exports (C:\\\\Users\\\\tracker\\\\Desktop\\\\vue_learn\\\\3.숫자야구\\\\node_modules\\\\vue-loader\\\\lib\\\\index.js:67:22)\");\n\n//# sourceURL=webpack:///./NumberBaseball.vue?");
 
 /***/ }),
 
