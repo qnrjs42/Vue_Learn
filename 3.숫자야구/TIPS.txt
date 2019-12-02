@@ -7,3 +7,12 @@ ex)
 "devDependencies": {
   "vue-template-compiler": "^2.6.10",
 }
+-----------------------------------------------------------------------------------------
+ERROR in Entry module not found: Error: Can't resolve './src' in 'C:\…
+에러 해결 방법
+
+webpack-config.js 파일
+
+"scripts": {
+    "build": "webpack --config ./webpack-config.js"
+  },
