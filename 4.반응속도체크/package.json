@@ -4,7 +4,7 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "build": "webpack --config ./webpack-config.js"
+    "build": "webpack --watch --config ./webpack-config.js"
   },
   "author": "",
   "license": "ISC",
@@ -12,7 +12,9 @@
     "vue": "^2.6.10"
   },
   "devDependencies": {
+    "css-loader": "^3.2.0",
     "vue-loader": "^15.7.2",
+    "vue-style-loader": "^4.1.2",
     "vue-template-compiler": "^2.6.10",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10"
