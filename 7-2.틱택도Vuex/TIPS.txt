@@ -1,0 +1,9 @@
+1. package.json 패키지 중 vue와 vue-template-compiler 버전이 같아야 함
+ex)
+"dependencies": {
+  "vue": "^2.6.10"
+},
+
+"devDependencies": {
+  "vue-template-compiler": "^2.6.10",
+}
