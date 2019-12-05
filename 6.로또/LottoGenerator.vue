@@ -4,13 +4,11 @@
       당첨숫자
     </div>
     <div id="결과창">
-      <lotto-ball v-for="ball in winBalls" number="5"></lotto-ball>
+      <lotto-ball v-for="ball in winBalls" :key="ball" :number="ball"></lotto-ball>
     </div>
-    <div>
-      보너스
-    </div>
-    <lotto-ball v-if="bonus"></lotto-ball>
-    <button v-if="redo">한 번 더!</button>
+    <div>보너스</div>
+    <lotto-ball v-if="bonus" :number="bonus"></lotto-ball>
+    <button v-if="redo" @click="onClickRedo">한 번 더!</button>
   </div>
 </template>
 
@@ -29,6 +27,8 @@
     return [...winNumbers, bonusNumber];
   }
 
+  const timeouts = [];
+
   export default {
     components: {
       /*
@@ -41,7 +41,7 @@
         이름이 다르면 생략 불가능
       */
       LottoBall,
-    }
+    },
     data() {
       return {
         winNumbers: getWinNumbers(),
@@ -53,16 +53,43 @@
     computed: { // 데이터 계산같은거 할 때 성능적인 면에서 효과적임
     },
     methods: {
+      onClickRedo() {
+        this.winNumbers = getWinNumbers();
+        this.winBalls = [];
+        this.bonus = null;
+        this.redo = false;
+        this.showBalls();
+      },
+
+      showBalls() {
+        for(let i=0; i<this.winNumbers.length -1; i++) {
+          timeouts[i] = setTimeout(() => {
+            this.winBalls.push(this.winNumbers[i]);
+          }, (i+1) * 500);
+        }
+        timeouts[6] = setTimeout(() => {
+          this.bonus = this.winNumbers[6];
+          this.redo = true;
+        }, 3500);
+      }
     },
     mounted() { // 화면에 보여준 후
-      console.log('mounted');
-      this.changeHand();
+      this.showBalls();
     },
-    
-    beforeDestory() { // 사용한 라이프사이클 메모리 누수 위해 제거
-      console.log('beforeDestoryed');
-      clearInterval(interval);
+
+    beforeDestroy() { // 사용한 라이프사이클 메모리 누수 위해 제거
+      timeouts.forEach((t) => {
+        clearTimeout(t);
+      });
     },
+    watch: { // 변수 감시용
+      bonus(value, oldValue) {
+        console.log(value, oldValue);
+        if(value === null) {
+          this.showBalls();
+        }
+      }
+    }
 
   };
 </script>
