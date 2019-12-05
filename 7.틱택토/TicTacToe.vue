@@ -1,17 +1,20 @@
 <template>
-  <div> <!-- vue-css 태그는 카밀코드로 작성 예) backgroundImage yes background-image no -->
-
-  </div>
+  <table-component :table-data="tableData" />
 </template>
 
 <script>
+  import TableComponent from './Tablecomponent';
   export default {
     components: {
-
+      TableComponent
     },
     data() {
       return {
-
+        tableData: [
+          ['', '', ''],
+          ['', '', ''],
+          ['', '', ''],
+        ]
       };
     },
     computed: { // 데이터 계산같은거 할 때 성능적인 면에서 효과적임
