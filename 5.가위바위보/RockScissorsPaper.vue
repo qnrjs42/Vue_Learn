@@ -98,7 +98,7 @@ const computerChoice = (imgCoord) => {
     updated() { // 화면에 바뀔 때
       console.log('updated');
     },
-    beforeDestory() { // 사용한 라이프사이클 메모리 누수 위해 제거
+    beforeDestroy() { // 사용한 라이프사이클 메모리 누수 위해 제거
       console.log('beforeDestoryed');
       clearInterval(interval);
     },
