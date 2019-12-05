@@ -6,7 +6,7 @@
 </template>
 
 <script>
-  import Eventbus from './EventBus';
+  import EventBus from './EventBus';
   export default {
     props: {
       cellData: String,
