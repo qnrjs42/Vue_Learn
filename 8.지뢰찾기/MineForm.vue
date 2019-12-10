@@ -8,6 +8,8 @@
 </template>
 
 <script>
+  import { START_GAME } from './store';
+
   export default {
     data() {
       return {
@@ -28,7 +30,7 @@
         this.mine = e.target.value;
       },
       onClickBtn() {
-        this.$store.commit(START_GAME, { row:this.row, cell:this.cell, mine:this.mine});
+        this.$store.commit(START_GAME, { row:this.row, cell:this.cell, mine:this.mine });
       },
     },
   }

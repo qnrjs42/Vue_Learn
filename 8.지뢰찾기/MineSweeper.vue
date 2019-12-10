@@ -1,13 +1,9 @@
 <template>
   <div>
     <mine-form />
-    <div>
-      {{timer}}
-    </div>
-    <table-compoent />
-    <div>
-      {{result}}
-    </div>
+    <div>{{timer}}</div>
+    <table-component />
+    <div>{{result}}</div>
   </div>
 </template>
 
@@ -15,12 +11,14 @@
   import { mapState } from 'vuex';
   import store from './store';
   import TableComponent from './TableComponent';
+  import MineForm from './MineForm';
 
 
   export default {
     store,
     components: {
       TableComponent,
+      MineForm,
     },
 
     computed: { // 데이터 계산같은거 할 때 성능적인 면에서 효과적임
