@@ -1,7 +1,13 @@
 <template>
   <table>
     <tr v-for="(rowData, rowIndex) in tableData" :key="rowIndex">
-      <td v-for="(cellData, cellIndex) in rowData" :key="cellIndex" :style="cellDataStyle(rowIndex, cellIndex)">{{cellDataText(rowIndex, cellIndex)}}</td>
+      <td v-for="(cellData, cellIndex) in rowData" :key="cellIndex"
+        :style="cellDataStyle(rowIndex, cellIndex)"
+        @click="onClickTd(rowIndex, cellIndex)"
+        @contextmenu.prevent="onRightClickTd(rowIndex, cellIndex)"
+        >
+          {{cellDataText(rowIndex, cellIndex)}}
+      </td>
     </tr>
   </table>
 
@@ -9,11 +15,11 @@
 
 <script>
   import { mapState } from 'vuex';
-  import { CODE } from './store';
+  import { CODE, OPEN_CELL, FLAG_CELL, QUESTION_CELL, NORMALIZE_CELL } from './store';
 
   export default {
     computed: {
-      ...mapState(['tableData']),
+      ...mapState(['tableData', 'halted']),
       cellDataStyle(state) {
         return (row, cell) => {
           switch (this.$store.state.tableData[row][cell]) {
@@ -65,6 +71,35 @@
           }
         }
       },
-    }
+    },
+    methods: {
+      onClickTd(row, cell) {
+        if(this.halted) { // 게임이 멈췄을 때
+          return;
+        }
+        this.$store.commit(OPEN_CELL, { row, cell });
+      },
+      onRightClickTd(row, cell) {
+        if(this.halted) { // 게임이 멈췄을 때
+          return;
+        }
+        switch (this.tableData[row][cell]) {
+          case CODE.NORMAL:
+          case CODE.MINE:
+            this.$store.commit(FLAG_CELL, { row, cell });
+            return;
+          case CODE.FLAG_MINE:
+          case CODE.FLAG:
+            this.$store.commit(QUESTION_CELL, { row, cell });
+            return;
+          case CODE.QUESTION_MINE:
+          case CODE.QUESTION:
+            this.$store.commit(NORMALIZE_CELL, { row, cell });
+            return;
+          default:
+
+        }
+      },
+    },
   }
 </script>
