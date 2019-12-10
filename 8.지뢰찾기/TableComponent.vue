@@ -15,7 +15,7 @@
 
 <script>
   import { mapState } from 'vuex';
-  import { CODE, OPEN_CELL, FLAG_CELL, QUESTION_CELL, NORMALIZE_CELL } from './store';
+  import { CODE, CLICK_MINE, OPEN_CELL, FLAG_CELL, QUESTION_CELL, NORMALIZE_CELL } from './store';
 
   export default {
     computed: {
@@ -65,8 +65,8 @@
             case CODE.CLICKED_MINE:
               return '펑';
 
-            default:
-              return '';
+            default: // 기본적으로 주변 폭탄 개수 표시하거나 0개는 표시 X
+              return this.$store.state.tableData[row][cell] || '';
 
           }
         }
@@ -76,6 +76,14 @@
       onClickTd(row, cell) {
         if(this.halted) { // 게임이 멈췄을 때
           return;
+        }
+        switch(this.tableData[row][cell]) {
+          case CODE.NORMAL:
+            return this.$store.commit(OPEN_CELL, {row, cell});
+          case CODE.MINE:
+            return this.$store.commit(CLICK_MINE, {row, cell});
+          default:
+            return;
         }
         this.$store.commit(OPEN_CELL, { row, cell });
       },
