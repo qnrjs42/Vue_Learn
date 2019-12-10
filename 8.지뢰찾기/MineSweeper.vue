@@ -9,10 +9,11 @@
 
 <script>
   import { mapState } from 'vuex';
-  import store from './store';
+  import store, { INCREMENT_TIMER } from './store';
   import TableComponent from './TableComponent';
   import MineForm from './MineForm';
 
+  let interval;
 
   export default {
     store,
@@ -22,10 +23,21 @@
     },
 
     computed: { // 데이터 계산같은거 할 때 성능적인 면에서 효과적임
-      ...mapState(['timer', 'result']),
+      ...mapState(['timer', 'result', 'halted']),
     },
     methods: {
     },
+    watch: {
+      halted(value, oldValue) {
+        if(value === false) { // false 일 때 게임 시작
+          interval = setInterval(() => {
+            this.$store.commit(INCREMENT_TIMER);
+          }, 1000); // 자바스크립트의 타이머는 정확하지 않을 수도 있다
+        } else { // 게임 중단
+          clearInterval(interval);
+        }
+      }
+    }
 
   };
 </script>
